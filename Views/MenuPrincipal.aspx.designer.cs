@@ -33,6 +33,24 @@ namespace ExamenProgra6FinalFront.Views
         protected global::System.Web.UI.WebControls.TextBox txtBuscar;
 
         /// <summary>
+        /// Control rfvBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBuscar;
+
+        /// <summary>
+        /// Control cvBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvBuscar;
+
+        /// <summary>
         /// Control btnBuscar.
         /// </summary>
         /// <remarks>
@@ -69,13 +87,40 @@ namespace ExamenProgra6FinalFront.Views
         protected global::System.Web.UI.WebControls.Button btnExcel;
 
         /// <summary>
-        /// Control txtBuscarID.
+        /// Control btnRefrescar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarID;
+        protected global::System.Web.UI.WebControls.Button btnRefrescar;
+
+        /// <summary>
+        /// Control txtID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtID;
+
+        /// <summary>
+        /// Control rfvID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvID;
+
+        /// <summary>
+        /// Control cvID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvID;
 
         /// <summary>
         /// Control txtIdentificacion.
@@ -87,6 +132,24 @@ namespace ExamenProgra6FinalFront.Views
         protected global::System.Web.UI.WebControls.TextBox txtIdentificacion;
 
         /// <summary>
+        /// Control rfvIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIdentificacion;
+
+        /// <summary>
+        /// Control cvIdentificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvIdentificacion;
+
+        /// <summary>
         /// Control txtPrimerNombre.
         /// </summary>
         /// <remarks>
@@ -94,6 +157,15 @@ namespace ExamenProgra6FinalFront.Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPrimerNombre;
+
+        /// <summary>
+        /// Control rfvPrimerNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrimerNombre;
 
         /// <summary>
         /// Control txtSegundoNombre.
@@ -114,6 +186,15 @@ namespace ExamenProgra6FinalFront.Views
         protected global::System.Web.UI.WebControls.TextBox txtPrimerApellido;
 
         /// <summary>
+        /// Control rfvPrimerApellido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPrimerApellido;
+
+        /// <summary>
         /// Control txtSegundoApellido.
         /// </summary>
         /// <remarks>
@@ -123,13 +204,13 @@ namespace ExamenProgra6FinalFront.Views
         protected global::System.Web.UI.WebControls.TextBox txtSegundoApellido;
 
         /// <summary>
-        /// Control Calendario.
+        /// Control cFechaNecimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendario;
+        protected global::System.Web.UI.WebControls.Calendar cFechaNecimiento;
 
         /// <summary>
         /// Control txtDireccion.
@@ -139,6 +220,15 @@ namespace ExamenProgra6FinalFront.Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+
+        /// <summary>
+        /// Control rfvDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDireccion;
 
         /// <summary>
         /// Control btnActualizar.
