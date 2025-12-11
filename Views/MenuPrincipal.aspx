@@ -161,6 +161,10 @@
 
             <!-- Botones de acción-->
             <div class="mt-4 mb-5">
+
+                <asp:Button runat="server" ID="btnCrear" Text="➕ Crear Estudiante"
+                    CssClass="btn btn-success me-2" OnClick="btnCrear_Click" />
+
                 <asp:Button runat="server" ID="btnActualizar" Text="✏️ Actualizar"
                     CssClass="btn btn-warning me-2" OnClick="btnActualizar_Click" Enabled="false" />
 
@@ -168,7 +172,8 @@
                     CssClass="btn btn-danger me-2" OnClick="btnEliminar_Click" Enabled="false" />
 
                 <asp:Button runat="server" ID="btnLimpiar" Text="🧹 Limpiar Campos"
-                    CssClass="btn btn-secondary" OnClick="btnLimpiar_Click"/>
+                    CssClass="btn btn-secondary" OnClick="btnLimpiar_Click" />
+
             </div>
 
             <!-- Mensaje -->

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamenProgra6FinalFront.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,13 +17,8 @@ namespace ExamenProgra6FinalFront
         {
 
             // Código que se ejecuta al iniciar la aplicación
-            /*    AreaRegistration.RegisterAllAreas();
-                RouteConfig.RegisterRoutes(RouteTable.Routes);
-            */
-
-            // Código que se ejecuta al iniciar la aplicación
             AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);;
 
             // Deshabilitar UnobtrusiveValidationMode para evitar dependencia de jQuery
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;

@@ -6,15 +6,11 @@ using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Util;
 
 namespace ExamenProgra6FinalFront.Views
 {
@@ -475,5 +471,13 @@ namespace ExamenProgra6FinalFront.Views
             OptenerEstudiantes();
         }
 
+
+        /// <summary>
+        /// Redirige a la vista de crear estudiante
+        /// </summary>
+        public void btnCrear_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Views/CrearEstudiante.aspx");
+        }
     }
 }
