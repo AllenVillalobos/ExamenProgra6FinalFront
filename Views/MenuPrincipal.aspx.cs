@@ -20,6 +20,7 @@ namespace ExamenProgra6FinalFront.Views
 {
     public partial class MenuPrincipal : System.Web.UI.Page
     {
+        // Cliente HTTP para comunicarse con el API
         private readonly HttpClient httpClinet = new HttpClient();
         public void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,9 @@ namespace ExamenProgra6FinalFront.Views
                 OptenerEstudiantes();
             }
         }
+        /// <summary>
+        /// Método que obtiene los estudiantes desde el API y los carga en el GridView.
+        /// </summary>
         public async void OptenerEstudiantes()
         {
             try
@@ -35,6 +39,7 @@ namespace ExamenProgra6FinalFront.Views
                 List<Estudiante> estudiantes = await ListarEstudiantes();
                 if (estudiantes != null)
                 {
+                    //Cargar los estudiantes en el GridView
                     gvEstudiantes.DataSource = estudiantes;
                     gvEstudiantes.DataBind();
                 }
@@ -49,6 +54,11 @@ namespace ExamenProgra6FinalFront.Views
             }
         }
 
+
+        /// <summary>
+        /// Llama al API para traer la lista de estudiantes.
+        /// Devuelve una lista o null si hubo error.
+        /// </summary>
         public async Task<List<Estudiante>> ListarEstudiantes()
         {
             try
@@ -73,13 +83,22 @@ namespace ExamenProgra6FinalFront.Views
                 return null;
             }
         }
+
+        /// <summary>
+        /// Refresca la lista de estudiantes y limpia el mensaje.
+        /// </summary>
         public void btnRefrescar_Click(object sender, EventArgs e)
         {
             OptenerEstudiantes();
             lblMensaje.Text = "";
         }
+
+        /// <summary>
+        /// Busca un estudiante por ID y muestra sus datos.
+        /// </summary>
         public async void btnBuscar_Click(object sender, EventArgs e)
         {
+            // Se activan y desactivan validaciones según la acción
             rfvBuscar.Enabled = true;
             cvBuscar.Enabled = true;
             rfvID.Enabled = false;
@@ -89,23 +108,33 @@ namespace ExamenProgra6FinalFront.Views
             rfvPrimerApellido.Enabled = false;
             rfvDireccion.Enabled = false;
             cvIdentificacion.Enabled = false;
+
+            // Verifica si los datos ingresados cumplen las validaciones
             Page.Validate();
             if (!Page.IsValid)
             {
+
+                // Mensaje cuando falta algún dato obligatorio
                 lblMensaje.Text = "Por favor ingrese un ID válido para buscar.";
                 return;
             }
             try
             {
+
+                // Se arma la URL remplazando {id}
                 string urlTemplate = ConfigurationManager.AppSettings["BuscarEstudiantes"];
                 string url = urlTemplate.Replace("{id}", txtBuscar.Text.Trim());
+
                 var resultado = await httpClinet.GetAsync(url);
                 if (resultado.IsSuccessStatusCode)
                 {
+                    // Se convierte la respuesta a objeto estudiante
                     var json = await resultado.Content.ReadAsStringAsync();
                     Estudiante estudiante = Newtonsoft.Json.JsonConvert.DeserializeObject<Estudiante>(json);
                     List<Estudiante> estudiantes = new List<Estudiante>();
                     estudiantes.Add(estudiante);
+
+                    // Se llenan los campos con los datos del estudiante
                     txtID.Text = estudiante.EstudianteID.ToString();
                     txtIdentificacion.Text = estudiante.Identificacion;
                     txtPrimerNombre.Text = estudiante.PrimerNombre;
@@ -115,6 +144,7 @@ namespace ExamenProgra6FinalFront.Views
                     cFechaNecimiento.SelectedDate = Convert.ToDateTime(estudiante.FechaNacimiento);
                     txtDireccion.Text = estudiante.Direccion;
 
+                    // Se llena la tabla solo con este estudiante
                     gvEstudiantes.DataSource = estudiantes;
                     gvEstudiantes.DataBind();
                     lblMensaje.Text = "Estudiante encontrado";
@@ -123,6 +153,7 @@ namespace ExamenProgra6FinalFront.Views
                 }
                 else
                 {
+                    // Si no existe, se redirige a crear
                     Response.Redirect("~/Views/CrearEstudiante.aspx");
                 }
             }
@@ -132,10 +163,17 @@ namespace ExamenProgra6FinalFront.Views
 
             }
         }
+
+        /// <summary>
+        /// Carga en los campos la fila seleccionada del GridView.
+        /// </summary>
         public void gvEstudiantes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Fila seleccionada
             int selectedIndex = gvEstudiantes.SelectedIndex;
             GridViewRow selectedRow = gvEstudiantes.Rows[selectedIndex];
+
+            // Se obtienen los valores de las celdas
             txtID.Text = Server.HtmlDecode(selectedRow.Cells[0].Text);
             txtIdentificacion.Text = Server.HtmlDecode(selectedRow.Cells[1].Text);
             txtPrimerNombre.Text = Server.HtmlDecode(selectedRow.Cells[2].Text);
@@ -147,6 +185,10 @@ namespace ExamenProgra6FinalFront.Views
             btnActualizar.Enabled = true;
             btnEliminar.Enabled = true;
         }
+
+        /// <summary>
+        /// Genera un archivo PDF con los datos de los estudiantes.
+        /// </summary>
         public async void btnPDF_Click(object sender, EventArgs e)
         {
             try
@@ -160,6 +202,8 @@ namespace ExamenProgra6FinalFront.Views
                         var documento = new Document(pdf);
                         documento.Add(new Paragraph("Lista de Estudiantes"));
                         documento.Add(new Paragraph("-----------------------------------------------------------------"));
+
+                        // Se agregan los datos
                         foreach (Estudiante estudiante in estudiantes)
                         {
                             documento.Add(new Paragraph("Estudiante ID: " + estudiante.EstudianteID));
@@ -179,6 +223,7 @@ namespace ExamenProgra6FinalFront.Views
                         documento.Close();
                     }
                 }
+                // Se envía el PDF generado al usuario
                 Response.ContentType = "application/pdf";
                 Response.AppendHeader("Content-Disposition", "attachment; filename=ListaEstudiantes.pdf");
                 Response.TransmitFile(ruta);
@@ -190,7 +235,9 @@ namespace ExamenProgra6FinalFront.Views
             }
         }
 
-
+        /// <summary>
+        /// Genera un archivo Excel con los estudiantes.
+        /// </summary>
         public async void btnExcel_Click(object sender, EventArgs e)
         {
             try
@@ -198,14 +245,19 @@ namespace ExamenProgra6FinalFront.Views
                 List<Estudiante> estudiantes = await ListarEstudiantes();
                 using (ExcelPackage excelPackage = new ExcelPackage())
                 {
+
                     //Agregar hoja
                     var hoja = excelPackage.Workbook.Worksheets.Add("Lista de Estudiantes");
+
+                    // Encabezados del archivo
                     hoja.Cells[1, 1].Value = "Estudiante ID";
                     hoja.Cells[1, 2].Value = "Identificación";
                     hoja.Cells[1, 3].Value = "Nombre Completo";
                     hoja.Cells[1, 4].Value = "Fecha De Nacimiento";
                     hoja.Cells[1, 5].Value = "Edad";
                     hoja.Cells[1, 6].Value = "Dirección";
+
+                    // Se agregan los datos
                     for (int i = 0; i < estudiantes.Count; i++)
                     {
                         hoja.Cells[i + 2, 1].Value = estudiantes[i].EstudianteID;
@@ -216,6 +268,8 @@ namespace ExamenProgra6FinalFront.Views
                         hoja.Cells[i + 2, 6].Value = estudiantes[i].Direccion;
 
                     }
+
+                    // Se envía el archivo al usuario
                     Response.Clear();
                     Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                     Response.AddHeader("content-disposition", "attachment; filename=ListaEstudiantes.xlsx");
@@ -234,8 +288,13 @@ namespace ExamenProgra6FinalFront.Views
                 lblMensaje.Text = "Error al generar el archivo Excel: " + ex.Message;
             }
         }
+
+        /// <summary>
+        /// Actualiza un estudiante usando los datos del formulario.
+        /// </summary>
         public async void btnActualizar_Click(object sender, EventArgs e)
         {
+            // Se activan las validaciones necesarias para actualizar
             rfvBuscar.Enabled = false;
             cvBuscar.Enabled = false;
             rfvID.Enabled = true;
@@ -246,17 +305,23 @@ namespace ExamenProgra6FinalFront.Views
             rfvDireccion.Enabled = true;
             cvIdentificacion.Enabled = true;
 
+            // Verifica si los datos ingresados cumplen las validaciones
             Page.Validate();
 
             if (!Page.IsValid)
             {
+                // Mensaje cuando falta algún dato obligatorio
                 lblMensaje.Text = "Por favor complete todos los campos obligatorios correctamente";
                 return;
             }
             try
             {
+
+                // Se arma la URL reemplazando el ID
                 string urlTemplate = ConfigurationManager.AppSettings["ModificarEstudiante"];
                 string url = urlTemplate.Replace("{id}", txtID.Text);
+
+                // Se crea el objeto estudiante con los datos del formulario
                 Estudiante estudiante = new Estudiante
                 {
                     EstudianteID = Convert.ToInt32(txtID.Text),
@@ -267,7 +332,7 @@ namespace ExamenProgra6FinalFront.Views
                     Direccion = txtDireccion.Text
                 };
 
-
+                // Campos opcionales. Se asignan valores vacíos si no se ingresó nada
                 if (string.IsNullOrWhiteSpace(txtSegundoApellido.Text))
                 {
                     estudiante.SegundoApellido = "";
@@ -284,11 +349,16 @@ namespace ExamenProgra6FinalFront.Views
                 {
                     estudiante.SegundoNombre = txtSegundoNombre.Text;
                 }
+
+
                 var jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(estudiante);
                 var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+
+                // Se envía la actualización al API
                 var resultado = await httpClinet.PutAsync(url, content);
                 if (resultado.IsSuccessStatusCode)
                 {
+                    // Se refresca la lista
                     OptenerEstudiantes();
                     lblMensaje.Text = "Se actualizo con exito al estudiante";
                 }
@@ -303,7 +373,7 @@ namespace ExamenProgra6FinalFront.Views
             }
             finally
             {
-
+                // Se limpian los campos y se deshabilitan botones
                 btnActualizar.Enabled = false;
                 btnEliminar.Enabled = false;
                 txtID.Text = "";
@@ -318,8 +388,12 @@ namespace ExamenProgra6FinalFront.Views
             }
         }
 
+        /// <summary>
+        /// Elimina un estudiante usando su ID.
+        /// </summary>
         public async void btnEliminar_Click(object sender, EventArgs e)
         {
+            // Se activan las validaciones necesarias para eliminar
             rfvBuscar.Enabled = false;
             cvBuscar.Enabled = false;
             rfvID.Enabled = true;
@@ -330,20 +404,26 @@ namespace ExamenProgra6FinalFront.Views
             rfvDireccion.Enabled = true;
             cvIdentificacion.Enabled = true;
 
+            // Verifica si los datos ingresados cumplen las validaciones
             Page.Validate();
 
             if (!Page.IsValid)
             {
+                // Mensaje cuando falta algún dato obligatorio
                 lblMensaje.Text = "Por favor complete todos los campos obligatorios correctamente";
                 return;
             }
             try
             {
+                // Se arma la URL reemplazando {id}
                 string urlTemplate = ConfigurationManager.AppSettings["EliminarEstudiante"];
                 string url = urlTemplate.Replace("{id}", txtID.Text);
+
+                // Se envía la solicitud de eliminación al API
                 var resultado = await httpClinet.DeleteAsync(url);
                 if (resultado.IsSuccessStatusCode)
                 {
+                    // Se refresca la lista
                     lblMensaje.Text = "Se Elimino con exito al estudiante";
                     OptenerEstudiantes();
 
@@ -359,6 +439,7 @@ namespace ExamenProgra6FinalFront.Views
             }
             finally
             {
+                // Se limpian los campos y se deshabilitan botones
                 btnActualizar.Enabled = false;
                 btnEliminar.Enabled = false;
                 txtID.Text = "";
@@ -373,8 +454,12 @@ namespace ExamenProgra6FinalFront.Views
             }
         }
 
+        /// <summary>
+        /// Limpia todos los campos visuales del formulario.
+        /// </summary>
         public void btnLimpiar_Click(object sender, EventArgs e)
         {
+            // Limpieza general del formulario
             txtBuscar.Text = "";
             txtID.Text = "";
             txtIdentificacion.Text = "";
@@ -386,6 +471,7 @@ namespace ExamenProgra6FinalFront.Views
             txtDireccion.Text = "";
             lblMensaje.Text = "";
 
+            // Recarga los estudiantes en el Grid
             OptenerEstudiantes();
         }
 
