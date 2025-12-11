@@ -5,58 +5,103 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <title>Crear Estudiantes</title>
 </head>
-<body>
+<body class="bg-light">
     <form id="form1" runat="server">
-        <div>
-            <h1>Crear Estudiantes</h1>
 
-            <asp:Label runat="server">Identificación:</asp:Label>
-            <asp:TextBox runat="server" ID="txtIdentificacion" />
+        <div class="container mt-5">
 
-            <asp:RequiredFieldValidator runat="server" ID="rfvIdentificacion" ControlToValidate="txtIdentificacion" ErrorMessage="La identificación es obligatoria" ForeColor="Red" Enabled="false" />
+            <h2 class="text-center mb-4">Crear Estudiante</h2>
 
-            <asp:CompareValidator runat="server" ID="cvIdentificacion" ControlToValidate="txtIdentificacion" Operator="DataTypeCheck" Type="Integer"
-                ErrorMessage="La identificación debe contener solo números" ForeColor="Red" Enabled="false" />
-            <br />
+            <!-- Identificación -->
+            <div class="mb-3">
+                <label class="form-label">Identificación</label>
+                <asp:TextBox runat="server" ID="txtIdentificacion" CssClass="form-control"></asp:TextBox>
+
+                <asp:RequiredFieldValidator runat="server" ID="rfvIdentificacion"
+                    ControlToValidate="txtIdentificacion" ErrorMessage="La identificación es obligatoria"
+                    ForeColor="Red" Enabled="false" />
+
+                <asp:CompareValidator runat="server" ID="cvIdentificacion"
+                    ControlToValidate="txtIdentificacion" Operator="DataTypeCheck" Type="Integer"
+                    ErrorMessage="La identificación debe contener solo números" ForeColor="Red" Enabled="false" />
+            </div>
 
 
-            <asp:Label runat="server">Primer Nombre:</asp:Label>
-            <asp:TextBox runat="server" ID="txtPrimerNombre" />
-            <asp:RequiredFieldValidator runat="server" ID="rfvPrimerNombre" ControlToValidate="txtPrimerNombre" ErrorMessage="El primer nombre es obligatorio" ForeColor="Red" Enabled="false" />
-            <br />
+            <!-- Primer Nombre -->
+            <div class="mb-3">
+                <label class="form-label">Primer Nombre</label>
+                <asp:TextBox runat="server" ID="txtPrimerNombre" CssClass="form-control"></asp:TextBox>
 
-            <asp:Label runat="server">Segundo Nombre:</asp:Label>
-            <asp:TextBox runat="server" ID="txtSegundoNombre" />
-            <br />
+                <asp:RequiredFieldValidator runat="server" ID="rfvPrimerNombre"
+                    ControlToValidate="txtPrimerNombre" ErrorMessage="El primer nombre es obligatorio"
+                    ForeColor="Red" Enabled="false" />
+            </div>
 
-            <asp:Label runat="server">Primer Apellido:</asp:Label>
-            <asp:TextBox runat="server" ID="txtPrimerApellido" />
-            <asp:RequiredFieldValidator runat="server" ID="rfvPrimerApellido" ControlToValidate="txtPrimerNombre" ErrorMessage="El primer apellido es obligatorio" ForeColor="Red" Enabled="false" />
-            <br />
 
-            <asp:Label runat="server">Segundo Apellido:</asp:Label>
-            <asp:TextBox runat="server" ID="txtSegundoApellido" />
-            <br />
+            <!-- Segundo Nombre -->
+            <div class="mb-3">
+                <label class="form-label">Segundo Nombre</label>
+                <asp:TextBox runat="server" ID="txtSegundoNombre" CssClass="form-control"></asp:TextBox>
+            </div>
 
-            <asp:Label runat="server">Fecha Nacimiento:</asp:Label>
-            <asp:Calendar runat="server" ID="cFechaNecimiento"></asp:Calendar>
-            <br />
 
-            <asp:Label runat="server">Dirección:</asp:Label>
-            <asp:TextBox runat="server" ID="txtDireccion" TextMode="MultiLine" Rows="3" />
-            <asp:RequiredFieldValidator runat="server" ID="rfvDireccion" ControlToValidate="txtDireccion" ErrorMessage="La dirección es obligatoria" ForeColor="Red" Enabled="false" />
-            <br />
-            <br />
+            <!-- Primer Apellido -->
+            <div class="mb-3">
+                <label class="form-label">Primer Apellido</label>
+                <asp:TextBox runat="server" ID="txtPrimerApellido" CssClass="form-control"></asp:TextBox>
 
-            <asp:Button runat="server" ID="btnCrear" Text="Crear Estudiante" OnClick="btnCrear_Click" />
-            <asp:Button runat="server" ID="btnVolver" Text="Volver" OnClick="btnVolver_Click" />
+                <asp:RequiredFieldValidator runat="server" ID="rfvPrimerApellido"
+                    ControlToValidate="txtPrimerApellido" ErrorMessage="El primer apellido es obligatorio"
+                    ForeColor="Red" Enabled="false" />
+            </div>
 
-            <br />
-            <br />
-            <asp:Label runat="server" ID="lblMensaje" />
+
+            <!-- Segundo Apellido -->
+            <div class="mb-3">
+                <label class="form-label">Segundo Apellido</label>
+                <asp:TextBox runat="server" ID="txtSegundoApellido" CssClass="form-control"></asp:TextBox>
+            </div>
+
+
+            <!-- Fecha de nacimiento -->
+            <div class="mb-3">
+                <label class="form-label">Fecha Nacimiento</label>
+                <div class="border rounded p-2 bg-white">
+                    <asp:Calendar runat="server" ID="cFechaNecimiento"></asp:Calendar>
+                </div>
+            </div>
+
+
+            <!-- Dirección -->
+            <div class="mb-3">
+                <label class="form-label">Dirección</label>
+                <asp:TextBox runat="server" ID="txtDireccion" TextMode="MultiLine" Rows="3"
+                    CssClass="form-control"></asp:TextBox>
+
+                <asp:RequiredFieldValidator runat="server" ID="rfvDireccion"
+                    ControlToValidate="txtDireccion" ErrorMessage="La dirección es obligatoria"
+                    ForeColor="Red" Enabled="false" />
+            </div>
+
+            <!-- Botones -->
+            <div class="mt-4">
+                <asp:Button runat="server" ID="btnCrear" Text="Crear Estudiante"
+                    CssClass="btn btn-primary me-2" OnClick="btnCrear_Click" />
+
+                <asp:Button runat="server" ID="btnVolver" Text="Volver"
+                    CssClass="btn btn-secondary" OnClick="btnVolver_Click" />
+            </div>
+
+
+            <!-- Mensaje -->
+            <asp:Label runat="server" ID="lblMensaje" CssClass="fw-bold mt-3"></asp:Label>
+
         </div>
+
     </form>
 </body>
 </html>
