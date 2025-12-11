@@ -89,10 +89,10 @@
 
             <!-- Botones -->
             <div class="mt-4">
-                <asp:Button runat="server" ID="btnCrear" Text="Crear Estudiante"
+                <asp:Button runat="server" ID="btnCrear" Text="➕ Crear Estudiante"
                     CssClass="btn btn-primary me-2" OnClick="btnCrear_Click" />
 
-                <asp:Button runat="server" ID="btnVolver" Text="Volver"
+                <asp:Button runat="server" ID="btnVolver" Text="⬅️ Volver"
                     CssClass="btn btn-secondary" OnClick="btnVolver_Click" />
             </div>
 

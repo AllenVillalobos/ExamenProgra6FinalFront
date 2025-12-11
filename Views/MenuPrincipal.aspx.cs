@@ -372,5 +372,22 @@ namespace ExamenProgra6FinalFront.Views
 
             }
         }
+
+        public void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Text = "";
+            txtID.Text = "";
+            txtIdentificacion.Text = "";
+            txtPrimerNombre.Text = "";
+            txtSegundoNombre.Text = "";
+            txtPrimerApellido.Text = "";
+            txtSegundoApellido.Text = "";
+            cFechaNecimiento.SelectedDate = DateTime.Now;
+            txtDireccion.Text = "";
+            lblMensaje.Text = "";
+
+            OptenerEstudiantes();
+        }
+
     }
 }
