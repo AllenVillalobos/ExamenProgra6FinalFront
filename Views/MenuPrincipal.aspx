@@ -35,7 +35,7 @@
             <!-- Lista -->
             <h4>Lista de Estudiantes</h4>
 
-            <asp:GridView runat="server" ID="gvEstudiantes"
+            <asp:GridView EmptyDataText="No se encontraron estudiantes" runat="server" ID="gvEstudiantes"
                 CssClass="table table-bordered table-striped mt-2"
                 AutoGenerateColumns="false"
                 OnSelectedIndexChanged="gvEstudiantes_SelectedIndexChanged">

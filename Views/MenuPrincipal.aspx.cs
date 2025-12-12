@@ -41,7 +41,8 @@ namespace ExamenProgra6FinalFront.Views
                 }
                 else
                 {
-                    lblMensaje.Text = "No se encontraron estudiantes.";
+                    gvEstudiantes.DataSource = null;
+                    gvEstudiantes.DataBind();
                 }
             }
             catch (Exception ex)
@@ -69,13 +70,11 @@ namespace ExamenProgra6FinalFront.Views
                 }
                 else
                 {
-                    lblMensaje.Text = "No se encontraron estudiantes.";
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                lblMensaje.Text = "Error al listar estudiantes: " + ex.Message;
                 return null;
             }
         }
@@ -85,6 +84,17 @@ namespace ExamenProgra6FinalFront.Views
         /// </summary>
         public void btnRefrescar_Click(object sender, EventArgs e)
         {
+            // Se desactivan validaciones 
+            rfvBuscar.Enabled = false;
+            cvBuscar.Enabled = false;
+            rfvID.Enabled = false;
+            cvID.Enabled = false;
+            rfvIdentificacion.Enabled = false;
+            rfvPrimerNombre.Enabled = false;
+            rfvPrimerApellido.Enabled = false;
+            rfvDireccion.Enabled = false;
+            cvIdentificacion.Enabled = false;
+
             OptenerEstudiantes();
             lblMensaje.Text = "";
         }
@@ -177,7 +187,7 @@ namespace ExamenProgra6FinalFront.Views
             txtPrimerApellido.Text = Server.HtmlDecode(selectedRow.Cells[4].Text);
             txtSegundoApellido.Text = Server.HtmlDecode(selectedRow.Cells[5].Text);
             cFechaNecimiento.SelectedDate = Convert.ToDateTime(Server.HtmlDecode(selectedRow.Cells[6].Text));
-            txtDireccion.Text = selectedRow.Cells[7].Text;
+            txtDireccion.Text = Server.HtmlDecode(selectedRow.Cells[8].Text);
             btnActualizar.Enabled = true;
             btnEliminar.Enabled = true;
         }
@@ -187,6 +197,17 @@ namespace ExamenProgra6FinalFront.Views
         /// </summary>
         public async void btnPDF_Click(object sender, EventArgs e)
         {
+            // Se desactivan validaciones 
+            rfvBuscar.Enabled = false;
+            cvBuscar.Enabled = false;
+            rfvID.Enabled = false;
+            cvID.Enabled = false;
+            rfvIdentificacion.Enabled = false;
+            rfvPrimerNombre.Enabled = false;
+            rfvPrimerApellido.Enabled = false;
+            rfvDireccion.Enabled = false;
+            cvIdentificacion.Enabled = false;
+
             try
             {
                 string ruta = Server.MapPath("~/Reportes/ListaEstudiantes.pdf");
@@ -236,6 +257,17 @@ namespace ExamenProgra6FinalFront.Views
         /// </summary>
         public async void btnExcel_Click(object sender, EventArgs e)
         {
+            // Se desactivan validaciones 
+            rfvBuscar.Enabled = false;
+            cvBuscar.Enabled = false;
+            rfvID.Enabled = false;
+            cvID.Enabled = false;
+            rfvIdentificacion.Enabled = false;
+            rfvPrimerNombre.Enabled = false;
+            rfvPrimerApellido.Enabled = false;
+            rfvDireccion.Enabled = false;
+            cvIdentificacion.Enabled = false;
+
             try
             {
                 List<Estudiante> estudiantes = await ListarEstudiantes();
@@ -394,11 +426,6 @@ namespace ExamenProgra6FinalFront.Views
             cvBuscar.Enabled = false;
             rfvID.Enabled = true;
             cvID.Enabled = true;
-            rfvIdentificacion.Enabled = true;
-            rfvPrimerNombre.Enabled = true;
-            rfvPrimerApellido.Enabled = true;
-            rfvDireccion.Enabled = true;
-            cvIdentificacion.Enabled = true;
 
             // Verifica si los datos ingresados cumplen las validaciones
             Page.Validate();
@@ -469,6 +496,17 @@ namespace ExamenProgra6FinalFront.Views
 
             // Recarga los estudiantes en el Grid
             OptenerEstudiantes();
+
+            // Se desactivan validaciones 
+            rfvBuscar.Enabled = false;
+            cvBuscar.Enabled = false;
+            rfvID.Enabled = false;
+            cvID.Enabled = false;
+            rfvIdentificacion.Enabled = false;
+            rfvPrimerNombre.Enabled = false;
+            rfvPrimerApellido.Enabled = false;
+            rfvDireccion.Enabled = false;
+            cvIdentificacion.Enabled = false;
         }
 
 

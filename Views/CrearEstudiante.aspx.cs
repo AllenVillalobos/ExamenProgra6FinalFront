@@ -84,6 +84,14 @@ namespace ExamenProgra6FinalFront.Views
                 if (response.IsSuccessStatusCode)
                 {
                     lblMensaje.Text = "Estudiante creado exitosamente";
+
+                    txtIdentificacion.Text = "";
+                    txtPrimerNombre.Text = "";
+                    txtSegundoNombre.Text = "";
+                    txtPrimerApellido.Text = "";
+                    txtSegundoApellido.Text = "";
+                    cFechaNecimiento.SelectedDate = DateTime.Now;
+                    txtDireccion.Text = "";
                 }
                 else
                 {
